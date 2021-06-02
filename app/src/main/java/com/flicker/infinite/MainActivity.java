@@ -1,14 +1,13 @@
 package com.flicker.infinite;
 
-import androidx.appcompat.app.AppCompatActivity;
-
-import android.content.res.TypedArray;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
+import android.content.Context;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.GridView;
-
+import android.widget.ImageView;
+import androidx.appcompat.app.AppCompatActivity;
 import java.util.ArrayList;
+
 
 public class MainActivity extends AppCompatActivity {
 
@@ -19,21 +18,12 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
+        setTitle("Gallery");
         gridView = (GridView) findViewById(R.id.gridView);
-        gridAdapter = new GridViewAdapter(this, R.layout.grid_item_layout, getData());
+        Context context = this;
+        ImageView imageView = (ImageView) findViewById(R.id.imageView);
+        imageView.setVisibility(View.INVISIBLE);
+        gridAdapter = new GridViewAdapter(context, R.layout.grid_item_layout, new ArrayList<>());
         gridView.setAdapter(gridAdapter);
     }
-
-    // Prepare some dummy data for gridview
-    private ArrayList<ImageItem> getData() {
-        final ArrayList<ImageItem> imageItems = new ArrayList<>();
-        for (int i = 0; i < 20; i++) {
-            Bitmap bitmap = BitmapFactory.decodeResource(getResources(), R.drawable.cat);
-            imageItems.add(new ImageItem(bitmap,
-                    "https://img.favpng.com/21/6/7/cat-emoji-android-nougat-android-oreo-png-favpng-R7bcgx9cn6GKi3g00a8bHF53Y.jpg"));
-        }
-        return imageItems;
-    }
-
 }

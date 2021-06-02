@@ -21,8 +21,6 @@ public class MainActivity extends AppCompatActivity {
         setTitle("Gallery");
         gridView = (GridView) findViewById(R.id.gridView);
         Context context = this;
-        ImageView imageView = (ImageView) findViewById(R.id.imageView);
-        imageView.setVisibility(View.INVISIBLE);
         gridAdapter = new GridViewAdapter(context, R.layout.grid_item_layout, new ArrayList<>());
         gridView.setAdapter(gridAdapter);
     }

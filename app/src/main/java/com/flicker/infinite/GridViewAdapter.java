@@ -2,8 +2,10 @@ package com.flicker.infinite;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Color;
+import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -48,6 +50,14 @@ public class GridViewAdapter extends ArrayAdapter {
             LayoutInflater inflater = ((Activity) context).getLayoutInflater();
             convertView = inflater.inflate(layoutResourceId, parent, false);
             convertView = (ImageView) convertView.findViewById(R.id.image);
+            convertView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent activity2Intent = new Intent(context, ImageActivity.class);
+                    activity2Intent.putExtra("IMG",data.get(position));
+                    context.startActivity(activity2Intent);
+                }
+            });
         }
         Log.d(TAG, "getView: "+position);
         if(position+20 >= data.size()) {
@@ -60,6 +70,7 @@ public class GridViewAdapter extends ArrayAdapter {
                 .override(100)
                 .placeholder(R.drawable.cat)
                 .into((ImageView)convertView);
+
 
         return convertView;
     }
